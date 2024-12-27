@@ -13,21 +13,24 @@ struct CustomCircleView: View {
     
     var body: some View {
         
-        Circle()
-            .fill(
-                LinearGradient(
-                    colors: [
-                        .colorIndigoMedium,
-                        .colorSalmonLight],
-                    startPoint: isAnimatedGradient ? .topLeading : .bottomLeading,
-                    endPoint: isAnimatedGradient ? .bottomTrailing : .topTrailing)
-            )
-            .onAppear{
-                withAnimation(.linear(duration: 3.0).repeatForever(autoreverses: true)){
-                    isAnimatedGradient.toggle()
+        ZStack {
+            Circle()
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            .colorIndigoMedium,
+                            .colorSalmonLight],
+                        startPoint: isAnimatedGradient ? .topLeading : .bottomLeading,
+                        endPoint: isAnimatedGradient ? .bottomTrailing : .topTrailing)
+                )
+                .onAppear{
+                    withAnimation(.linear(duration: 3.0).repeatForever(autoreverses: true)){
+                        isAnimatedGradient.toggle()
+                    }
                 }
-            }
-            .frame(width: 256, height: 256)
+            MotionAnimationView()
+        }
+        .frame(width: 256, height: 256)
     }
 }
 
